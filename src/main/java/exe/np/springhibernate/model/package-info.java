@@ -1,0 +1,1 @@
+package exe.np.springhibernate.model;

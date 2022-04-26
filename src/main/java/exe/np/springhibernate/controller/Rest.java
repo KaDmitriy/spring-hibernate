@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.criteria.Predicate;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,9 +66,12 @@ public class Rest {
 	 */
 	@GetMapping("/listsubq")
 	public List<Book> getListSubQueryBook() {
-		Integer page = 100;
+		Integer page = 1000;
+		String name = "k 1";
 		return bookDAO.findAll((root, query, cb) -> {
-			return cb.and((page != null && page > 0) ? cb.le(root.get("pages"), page) : cb.conjunction());
+			Predicate p1 = cb.and(cb.like(root.get("name").as(String.class), "%" + name + "%"));
+			Predicate p2 = cb.and((page != null && page > 0) ? cb.le(root.get("pages"), page) : cb.conjunction());
+			return cb.and(p1, p2);
 		});
 	}
 	
@@ -78,7 +83,7 @@ public class Rest {
 	@GetMapping("/listview")
 	public List<BookView> getListViewBook() {
 		Integer page = 100;
-		return bookViewDAO.findAllQuery();
+		return bookViewDAO.findAll();
 	}
 
 }

@@ -4,19 +4,18 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-import javax.persistence.Embeddable;
-
 public class BookUserViewId  implements Serializable {
 
-	private static final long serialVersionUID = -7796272044893381115L;
-	private UUID userid;
-	private UUID bookid;
+	private static final long serialVersionUID = -7737524637398028358L;
 
-	public BookUserViewId(UUID userid, UUID bookid) {
+	private UUID bookid;
+	private UUID userid;
+	
+
+	public BookUserViewId(UUID bookid, UUID userid) {
 		this.userid = userid;
 		this.bookid = bookid;
 	}
-
 
 	@Override
 	public String toString() {

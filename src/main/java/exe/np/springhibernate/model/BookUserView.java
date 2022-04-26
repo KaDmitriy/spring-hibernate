@@ -20,12 +20,16 @@ import javax.persistence.Table;
 @Table(name = "book_user", schema = "public")
 @IdClass(BookUserViewId.class)
 public class BookUserView {
-	@Id
-	@Column(name = "userid")
-	private UUID userid;
+
 	@Id
 	@Column(name = "bookid")
 	private UUID bookid;
+	
+	
+	@Column(name = "userid")
+	private UUID userid;
+
+
 
 	public UUID getUserid() {
 		return userid;

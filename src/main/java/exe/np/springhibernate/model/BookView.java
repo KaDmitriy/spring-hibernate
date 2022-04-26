@@ -45,9 +45,9 @@ public class BookView {
 	private Integer countUser;
 	*/
 	
-	@ManyToOne(optional=false)
-	@JoinColumn (name="bookid", insertable=false, updatable=false)
-	private BookUserView countUser;
+	//@ManyToOne(optional=false)
+	//@JoinColumn (name="bookid", insertable=false, updatable=false)
+	//private BookUserView countUser;
 
 	public UUID getUid() {
 		return uid;

@@ -3,6 +3,7 @@
  */
 package exe.np.springhibernate.model;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 
@@ -35,7 +36,9 @@ public class Book {
     @Type(type = "pg-uuid")
 	private UUID uid;
 	private String name;
-	private String descr;	
+	private String descr;
+	private Date release;
+	private Integer pages;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "book_user", schema = "public", 
@@ -91,10 +94,26 @@ public class Book {
 		this.authors = authors;
 	}
 
+	public Date getRelease() {
+		return release;
+	}
+
+	public void setRelease(Date release) {
+		this.release = release;
+	}
+
+	public Integer getPages() {
+		return pages;
+	}
+
+	public void setPages(Integer pages) {
+		this.pages = pages;
+	}
+
 	@Override
 	public String toString() {
-		return "Book [uid=" + uid + ", name=" + name + ", descr=" + descr + ", users=" + users + ", authors=" + authors
-				+ "]";
+		return "Book [uid=" + uid + ", name=" + name + ", descr=" + descr + ", release=" + release + ", pages=" + pages
+				+ ", users=" + users + ", authors=" + authors + "]";
 	}
 
 }

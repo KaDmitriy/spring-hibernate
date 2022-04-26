@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import exe.np.springhibernate.model.Book;
+import exe.np.springhibernate.model.BookView;
 import exe.np.springhibernate.servise.BookDAO;
+import exe.np.springhibernate.servise.BookViewDAO;
 
 /**
  * @author Kartashov Dmitriy
@@ -26,13 +28,16 @@ import exe.np.springhibernate.servise.BookDAO;
 public class Rest {
 
 	private final Logger log = LoggerFactory.getLogger(Rest.class);
-	
+
 	@Autowired
 	private BookDAO bookDAO;
+	
+	@Autowired
+	private BookViewDAO bookViewDAO;
 
 	/**
-	 * URL = http://localhost:8080/book/list?release=2010-06-25T11:30
-	 * 
+	 * URL = http://localhost:8080/book/list?release=2010-06-25T11:30&page=100&name=oo
+	 *  
 	 * @param name
 	 * @param page
 	 * @param release
@@ -41,16 +46,39 @@ public class Rest {
 	@GetMapping("/list")
 	public List<Book> getListBook(@RequestParam(required = false, defaultValue = "") String name,
 			@RequestParam(required = false, defaultValue = "0") Integer page,
-			@RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")  Date release) {
+			@RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") Date release) {
 		log.debug("String name: {}", name);
 		log.debug("Integer page: {}", page);
 		log.debug("Date release: {}", release);
-		return bookDAO.findAll((root, query, cb) -> cb
-				.and((name != null && !name.isBlank()) ? cb.like(root.get("name").as(String.class), "%" + name + "%")
+		return bookDAO.findAll((root, query, cb) -> cb.and(
+				(name != null && !name.isBlank()) ? cb.like(root.get("name").as(String.class), "%" + name + "%")
 						: cb.conjunction(),
-						(release != null) ? cb.equal(root.get("release"), release) : cb.conjunction(),
-						(page != null && page > 0) ? cb.le(root.get("page"), page) : cb.conjunction()					
-						));
+				(release != null) ? cb.equal(root.get("release"), release) : cb.conjunction(),
+				(page != null && page > 0) ? cb.le(root.get("pages"), page) : cb.conjunction()));
+	}
+
+	/**
+	 * URL = http://localhost:8080/book/listsubq
+	 * 
+	 * @return
+	 */
+	@GetMapping("/listsubq")
+	public List<Book> getListSubQueryBook() {
+		Integer page = 100;
+		return bookDAO.findAll((root, query, cb) -> {
+			return cb.and((page != null && page > 0) ? cb.le(root.get("pages"), page) : cb.conjunction());
+		});
+	}
+	
+	/**
+	 * URL = http://localhost:8080/book/listview
+	 * 
+	 * @return
+	 */
+	@GetMapping("/listview")
+	public List<BookView> getListViewBook() {
+		Integer page = 100;
+		return bookViewDAO.findAllQuery();
 	}
 
 }

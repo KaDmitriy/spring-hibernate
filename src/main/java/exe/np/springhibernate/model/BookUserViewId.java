@@ -4,27 +4,38 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-public class BookUserViewId  implements Serializable {
+public class BookUserViewId implements Serializable {
 
 	private static final long serialVersionUID = -7737524637398028358L;
 
-	private UUID bookid;
-	private UUID userid;
-	
+	private UUID bookUid;
+	private UUID userUid;
 
-	public BookUserViewId(UUID bookid, UUID userid) {
-		this.userid = userid;
-		this.bookid = bookid;
+	public BookUserViewId(UUID bookUid, UUID userUid) {
+		super();
+		this.bookUid = bookUid;
+		this.userUid = userUid;
 	}
 
-	@Override
-	public String toString() {
-		return "BookUserViewId [userid=" + userid + ", bookid=" + bookid + "]";
+	public UUID getBookUid() {
+		return bookUid;
+	}
+
+	public void setBookUid(UUID bookUid) {
+		this.bookUid = bookUid;
+	}
+
+	public UUID getUserUid() {
+		return userUid;
+	}
+
+	public void setUserUid(UUID userUid) {
+		this.userUid = userUid;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(bookid, userid);
+		return Objects.hash(bookUid, userUid);
 	}
 
 	@Override
@@ -36,7 +47,7 @@ public class BookUserViewId  implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		BookUserViewId other = (BookUserViewId) obj;
-		return Objects.equals(bookid, other.bookid) && Objects.equals(userid, other.userid);
+		return Objects.equals(bookUid, other.bookUid) && Objects.equals(userUid, other.userUid);
 	}
 
 }

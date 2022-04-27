@@ -42,8 +42,8 @@ public class Book {
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "book_user", schema = "public", 
-     joinColumns = @JoinColumn(name = "`bookid`"),
-     inverseJoinColumns = @JoinColumn(name = "`userid`"))
+     joinColumns = @JoinColumn(name = "bookuid"),
+     inverseJoinColumns = @JoinColumn(name = "useruid"))
 	private Set<User> users;
 
 	

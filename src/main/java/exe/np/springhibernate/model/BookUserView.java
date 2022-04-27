@@ -22,29 +22,27 @@ import javax.persistence.Table;
 public class BookUserView {
 
 	@Id
-	@Column(name = "bookid")
-	private UUID bookid;
-	
-	
-	@Column(name = "userid")
-	private UUID userid;
+	@Column(name = "bookuid")
+	private UUID bookUid;
 
+	@Id
+	@Column(name = "useruid")
+	private UUID userUid;
 
-
-	public UUID getUserid() {
-		return userid;
+	public UUID getBookUid() {
+		return bookUid;
 	}
 
-	public void setUserid(UUID userid) {
-		this.userid = userid;
+	public void setBookUid(UUID bookUid) {
+		this.bookUid = bookUid;
 	}
 
-	public UUID getBookid() {
-		return bookid;
+	public UUID getUserUid() {
+		return userUid;
 	}
 
-	public void setBookid(UUID bookid) {
-		this.bookid = bookid;
+	public void setUserUid(UUID userUid) {
+		this.userUid = userUid;
 	}
 
 }

@@ -89,5 +89,4 @@ public class BookView {
 		this.release = release;
 	}
 
-
 }

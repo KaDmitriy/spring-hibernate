@@ -83,7 +83,10 @@ public class Rest {
 	@GetMapping("/listview")
 	public List<BookView> getListViewBook() {
 		Integer page = 100;
-		return bookViewDAO.findAll();
+		String name = "sdf";
+		return bookViewDAO.findAllQuery((root, query, cb) -> cb.and(
+				(name != null && !name.isBlank()) ? cb.like(root.get("name").as(String.class), "%" + name + "%")
+						: cb.conjunction()));
 	}
 
 }

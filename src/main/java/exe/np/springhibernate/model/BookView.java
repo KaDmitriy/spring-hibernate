@@ -30,7 +30,6 @@ public class BookView {
 	private UUID uid;
 	private String name;
 	private String descr;
-	private Date release;
 	private Integer pages;
 
 	/**
@@ -81,13 +80,6 @@ public class BookView {
 		this.pages = pages;
 	}
 
-	public Date getRelease() {
-		return release;
-	}
-
-	public void setRelease(Date release) {
-		this.release = release;
-	}
 
 
 }

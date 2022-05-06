@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import exe.np.springhibernate.model.Book;
 import exe.np.springhibernate.model.BookView;
+import exe.np.springhibernate.model.TableInt;
+import exe.np.springhibernate.model.TableUid;
 import exe.np.springhibernate.servise.BookDAO;
 import exe.np.springhibernate.servise.BookViewDAO;
+import exe.np.springhibernate.servise.TestTDAO;
 
 /**
  * @author Kartashov Dmitriy
@@ -33,6 +36,9 @@ public class Rest {
 
 	@Autowired
 	private BookDAO bookDAO;
+	
+	@Autowired
+	private TestTDAO testTDao;
 	
 	@Autowired
 	private BookViewDAO bookViewDAO;
@@ -84,9 +90,19 @@ public class Rest {
 	public List<BookView> getListViewBook() {
 		Integer page = 100;
 		String name = "sdf";
-		return bookViewDAO.findAllQuery((root, query, cb) -> cb.and(
-				(name != null && !name.isBlank()) ? cb.like(root.get("name").as(String.class), "%" + name + "%")
-						: cb.conjunction()));
+		return bookViewDAO.findAllQuery();
+	}
+	
+	@GetMapping("/listint")
+	public List<TableInt> getListTableInt() {
+
+		return testTDao.findAllQuery();
+	}
+	
+	@GetMapping("/listuid")
+	public List<TableUid> getListTableUid() {
+
+		return testTDao.findAllQueryUid();
 	}
 
 }

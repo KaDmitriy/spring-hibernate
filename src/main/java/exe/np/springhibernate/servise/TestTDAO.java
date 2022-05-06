@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
@@ -30,9 +31,15 @@ public class TestTDAO {
 	    return query.getResultList();
 	}
 	
-	public List<TableUid> findAllQueryUid() {
+	public List<TableUid> findAllNativeQueryUid() {
 		Query query =  em.createNativeQuery("select uid, name  from table_uid ", TableUid.class);
 	    return query.getResultList();
+	}
+	
+	public List<TableUid> findAllQueryUid() {
+		TypedQuery<TableUid> typedQuery =  em.createQuery("from TableUid", TableUid.class);
+		//TypedQuery<TableUid> typedQuery =  em.createQuery("select t  from TableUid t", TableUid.class);
+	    return typedQuery.getResultList();
 	}
 
 	

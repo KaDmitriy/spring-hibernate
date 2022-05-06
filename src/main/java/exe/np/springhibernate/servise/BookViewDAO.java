@@ -35,7 +35,7 @@ public class BookViewDAO {
 	//@Query(nativeQuery = true, value = "select * from \"public\".\"book\" b;")
 	//Specification<BookView> speca
 	public List<BookView> findAllQuery() {
-		Query query =  em.createNativeQuery("select * from book", BookView.class);
+		Query query =  em.createNativeQuery("select *, (select count(*) from  public.book_author where bookid = book.uid) countauthor from book", BookView.class);
 
 	   // query.setFirstResult(0);
 	   // query.setMaxResults(10);

@@ -32,22 +32,9 @@ public class BookView {
 	private String descr;
 	private Integer pages;
 
-	/**
-	 * @Formula prohibited from using @Query in DAO
-	 * 
-	 * uncomment BookViewDAO List<BookView> findAllQuery();
-	 */
-	/*
-	@Transient
-	@Column(name = "count_user")
-	//@Formula("(select count(*) from public.book_user bu where bu.bookid = uid and bu.userid='b47d48df-c10b-445a-b1d2-471526b480c9')")
-	private Integer countUser;
-	*/
+	private Integer countauthor;
 	
-	//@ManyToOne(optional=false)
-	//@JoinColumn (name="bookid", insertable=false, updatable=false)
-	//private BookUserView countUser;
-
+	
 	public UUID getUid() {
 		return uid;
 	}
@@ -78,6 +65,14 @@ public class BookView {
 
 	public void setPages(Integer pages) {
 		this.pages = pages;
+	}
+
+	public Integer getCountauthor() {
+		return countauthor;
+	}
+
+	public void setCountauthor(Integer countauthor) {
+		this.countauthor = countauthor;
 	}
 
 

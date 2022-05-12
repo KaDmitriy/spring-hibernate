@@ -4,6 +4,7 @@
 package exe.np.springhibernate.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -79,6 +80,7 @@ public class Book {
 	}
 
 	public Set<User> getUsers() {
+		if(users == null) users = new HashSet<User>();
 		return users;
 	}
 
@@ -87,6 +89,7 @@ public class Book {
 	}
 
 	public Set<Author> getAuthors() {
+		if(authors == null) authors = new HashSet<Author>();
 		return authors;
 	}
 

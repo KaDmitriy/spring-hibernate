@@ -46,7 +46,10 @@ public class BookObj {
 	@Autowired
 	private AuthorDao authorDAO;
 	
-	
+	/**
+	 * URL = http://localhost:8080/book/obj/listbook
+	 * @return
+	 */
 	@GetMapping("/listbook")
 	public List<Book> getListBook() {
 		log.debug("GET=/book/obj/listbook");

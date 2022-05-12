@@ -3,38 +3,26 @@ package exe.np.springhibernate.model;
 import java.util.Date;
 import java.util.UUID;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.transaction.Transactional;
 
-import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "book", schema = "public")
 public class BookView {
 
 	@Id
-	@GenericGenerator(name = "uuid", strategy = "uuid2")
-	@GeneratedValue(generator = "uuid")
 	@Type(type = "pg-uuid")
 	private UUID uid;
 	private String name;
 	private String descr;
 	private Integer pages;
+	private Date release;
 
-	private Integer countauthor;
-	
-	
 	public UUID getUid() {
 		return uid;
 	}
@@ -67,13 +55,18 @@ public class BookView {
 		this.pages = pages;
 	}
 
-	public Integer getCountauthor() {
-		return countauthor;
+	public Date getRelease() {
+		return release;
 	}
 
-	public void setCountauthor(Integer countauthor) {
-		this.countauthor = countauthor;
+	public void setRelease(Date release) {
+		this.release = release;
 	}
 
+	@Override
+	public String toString() {
+		return "BookView [uid=" + uid + ", name=" + name + ", descr=" + descr + ", pages=" + pages + ", release="
+				+ release + "]";
+	}
 
 }
